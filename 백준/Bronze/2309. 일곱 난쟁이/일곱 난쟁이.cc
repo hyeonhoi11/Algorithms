@@ -1,6 +1,5 @@
 #include<iostream>
 #include<algorithm>
-#include<vector>
 using namespace std;
 
 int main() {
@@ -8,41 +7,25 @@ int main() {
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 
-	vector<int> vec;
-	int sum = 0;
+	int a[9];
 
 	for (int i = 0; i < 9; i++) {
-		int height;
-		cin >> height;
-		vec.push_back(height);
-		sum += height;
+		cin >> a[i];
 	}
-	
-	int diff = sum - 100;
-	int a_1 = -1;
-	int a_2 = -1;
 
-	for (int i = 0; i < 8; i++) {
-		for (int j = i + 1; j < 9; j++) {
-			if (vec[i] + vec[j] == diff) {
-				a_1 = i;
-				a_2 = j;
-				break;
-			}
+	sort(a, a + 9);
+
+	do {
+		int sum = 0;
+		for (int i = 0; i < 7; i++) {
+			sum += a[i];
 		}
+
+		if (sum == 100) break;
+	} while (next_permutation(a, a + 9));
+
+	for (int i = 0; i < 7; i++) {
+		cout << a[i] << '\n';
 	}
-	vector<int> result;
-
-	for (int i = 0; i < vec.size(); i++) {
-		if (i == a_1 || i == a_2) continue;
-		result.push_back(vec[i]);
-	}
-
-	sort(result.begin(), result.end());
-
-	for (int i = 0; i < result.size(); i++) {
-		cout << result[i] << '\n';
-	}
-
 	return 0;
 }
